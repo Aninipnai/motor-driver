@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motor controller</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color:#80ffef;
+    }
+
+
+
+
+
+     	                  
+    .joystick-button {
+      width: 60px;
+      height: 60px;
+      margin: 20px;
+      border: 2px solid #333;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .move_forward { transform: rotate(0deg); background-color: #0000ff; color: #fff; }
+    .turn_right { transform: rotate(360deg); background-color: #2ecc71; color: #fff; }
+    .move_backward { transform: rot
+ate(0deg); background-color: #e74c3c; color: #fff; }
+    .turn_left { transform: rotate(360deg); background-color: #f39c12; color: #fff; }
+    .robot_stop { background-color: #cccccc; color: #333; }
+  </style>
+</head>
+<body>
+
+
+<h1 style="font-size:60px"> Joystick </h1>
+
+
+
+
+  <div class="joystick-button move_forward">&#8593;</div>
+  <div class="joystick-button turn_right">&#8594;</div>
+  <div class="joystick-button move_backward">&#8595;</div>
+  <div class="joystick-button turn_left">&#8592;</div>
+  <div class="joystick-button robot_stop">Stopp</div>
+
+
+
+ <body>
+ <title><h2><b>Joy stick controlls</b></h2></title>
+
+<script>
+const motionDropdown = document.getElementById('motion');
+const startButton = document.getElementById('start');
+
+
+const directionDropdown = document.getElementById('turns');
+const turnButton = document.getElementById('turn')
+
+
+//readiness
+$(document).ready(function(){
+    console.log("loading js modules");
+
+
+// add event listeners
+startButton.addEventListener('click',function(){ 
+
+
+// get selected option
+const selectMotion = motionDropdown.value;
+
+
+ switch(selectMotion) {
+    case 'move_forward':
+    move_forward();
+    break ;
+   }
+ switch(selectMotion) {
+    case 'move_backward':
+    move_backward();
+    break ;
+   }
+
+
+});    
+// add event listeners for turn 
+
+
+turnButton.addEventListener('click', function(){ 
+
+
+    // get selected option
+    const selectedDirection = directionDropdown.value;
+    switch(selectedDirection) {
+        case 'turn_left':
+        turn_left();
+        break ;
+    }
+    switch(selectedDirection) {
+        case 'turn_right':
+        turn_right();
+        break ;
+    }
+    switch(selectedDirection) {
+        case 'robot_stop':
+        robot_stop();
+        break ;
+     }
+
+
+
+});
+
+
+
+
+    $("#move_forward").click(function(){
+        console.log("making robot move forward");
+        move_forward();
+    });
+
+
+    $("#move_backward").click(function(){
+        console.log("making robot move backward");
+        move_backward();
+    });
+
+
+    $("#turn_left").click(function(){
+        console.log("making robot turn left");
+        turn_left();
+    });
+
+
+    $("#turn_right").click(function(){
+        console.log("making robot turn right");
+        turn_right();
+    });
+
+
+    $("#robot_stop").click(function(){
+        console.log("making robot stop");
+        robot_stop();
+    });
+
+
+
+
+    function move_forward()
+    {
+        let settings= {
+            "url":"https://wizklub.com/api/secured/wiziot-poll-request/",
+            "method":"POST",
+             "dataType":"json",
+             "contentType":"application/json ; charset=utf-8",
+             "headers":{
+                "Api-Access-key":"RkF1VDNJX0FDVXk1TVlDaDNsQ1U=",
+                "Api-Secret-key":"MmJoSzdTQloyZWxVdHJOZGc2d1pHaDJpS1hDUkU4VU5Mdw==",
+                "Content-type":"application/json",
+             },
+             "data": JSON.stringfy({
+                 "mode":"WRITE",
+                 "device_id":"sc13208",
+                 "source":"API",
+                "api": "motor-driver",
+                "type":"control",
+                "direction1":"1",
+                "direction2":"1",
+                "speed1":"255",
+                "speed2":"255"
+             }),
+        };
+        $.ajax(settings).done(function(response){
+            console.log(response);
+        });
+    }
+
+
+    function move_backward()
+    {
+        let settings= {
+            "url":"https://wizklub.com/api/secured/wiziot-poll-request/",
+            "method":"POST",
+             "dataType":"json",
+             "contentType":"application/json ; charset=utf-8",
+             "headers":{
+                "Api-Access-key":"RkF1VDNJX0FDVXk1TVlDaDNsQ1U=",
+                "Api-Secret-key":"MmJoSzdTQloyZWxVdHJOZGc2d1pHaDJpS1hDUkU4VU5Mdw==",
+                "Content-type":"application/json",
+             },
+             "data": JSON.stringfy({
+                 "mode":"WRITE",
+                 "device_id":"sc13208",
+                 "source":"API",
+                "api": "motor-driver",
+                "type":"control",
+                "direction1":"2",
+                "direction2":"2",
+                "speed1":"255",
+                "speed2":"255"
+             }),
+        };
+        $.ajax(settings).done(function(response){
+            console.log(response);
+        });
+    }
+
+
+    function turn_left()
+    {
+        let settings= {
+            "url":"https://wizklub.com/api/secured/wiziot-poll-request/",
+            "method":"POST",
+             "dataType":"json",
+             "contentType":"application/json ; charset=utf-8",
+             "headers":{
+                "Api-Access-key":"RkF1VDNJX0FDVXk1TVlDaDNsQ1U=",
+                "Api-Secret-key":"MmJoSzdTQloyZWxVdHJOZGc2d1pHaDJpS1hDUkU4VU5Mdw==",
+                "Content-type":"application/json",
+             },
+             "data": JSON.stringfy({
+                 "mode":"WRITE",
+                 "device_id":"sc13208",
+                 "source":"API",
+                "api": "motor-driver",
+                "type":"control",
+                "direction1":"2",
+                "direction2":"1",
+                "speed1":"255",
+                "speed2":"255"
+             }),
+        };
+        $.ajax(settings).done(function(response){
+            console.log(response);
+        });
+    }
+
+
+    function turn_right()
+    {
+        let settings= {
+            "url":"https://wizklub.com/api/secured/wiziot-poll-request/",
+            "method":"POST",
+             "dataType":"json",
+             "contentType":"application/json ; charset=utf-8",
+             "headers":{
+                "Api-Access-key":"RkF1VDNJX0FDVXk1TVlDaDNsQ1U=",
+                "Api-Secret-key":"MmJoSzdTQloyZWxVdHJOZGc2d1pHaDJpS1hDUkU4VU5Mdw==",
+                "Content-type":"application/json",
+             },
+             "data": JSON.stringfy({
+                 "mode":"WRITE",
+                 "device_id":"sc13208",
+                 "source":"API",
+                "api": "motor-driver",
+                "type":"control",
+                "direction1":"1",
+                "direction2":"2",
+                "speed1":"255",
+                "speed2":"255"
+             }),
+        };
+        $.ajax(settings).done(function(response){
+            console.log(response);
+        });
+    }
+
+
+    function robot_stop()
+    {
+        let settings= {
+            "url":"https://wizklub.com/api/secured/wiziot-poll-request/",
+            "method":"POST",
+             "dataType":"json",
+             "contentType":"application/json ; charset=utf-8",
+             "headers":{
+                "Api-Access-key":"RkF1VDNJX0FDVXk1TVlDaDNsQ1U=",
+                "Api-Secret-key":"MmJoSzdTQloyZWxVdHJOZGc2d1pHaDJpS1hDUkU4VU5Mdw==",
+                "Content-type":"application/json",
+             },
+             "data": JSON.stringfy({
+                 "mode":"WRITE",
+                 "device_id":"sc13208",
+                 "source":"API",
+                "api": "motor-driver",
+                "type":"control",
+                "direction1":"1",
+                "direction2":"1",
+                "speed1":"0",
+                "speed2":"0"
+             }),
+        };
+        $.ajax(settings).done(function(response){
+            console.log(response);
+        });
+    }
+
+
+});
+</script>
+
+</body>
+</html>
